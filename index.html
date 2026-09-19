@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>وایکینگ کافی | کافه‌ی لوکس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== SPLASH SCREEN ===================== -->
+<div id="splash" aria-label="ورود به وایکینگ کافی">
+  <div class="splash-bg">
+    <svg class="splash-illustration" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="cupGlow" cx="50%" cy="38%" r="65%">
+          <stop offset="0%" stop-color="#6b3f26"/>
+          <stop offset="55%" stop-color="#3a2415"/>
+          <stop offset="100%" stop-color="#1c120b"/>
+        </radialGradient>
+        <linearGradient id="cupBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f5ede0"/>
+          <stop offset="100%" stop-color="#d9c4a3"/>
+        </linearGradient>
+          <stop offset="0%" stop-color="#4a2f1f"/>
+          <stop offset="100%" stop-color="#2a1810"/>
+      </defs>
+      <!-- steam -->
+      <g class="steam" fill="none" stroke="#e9dcc5" stroke-width="6" stroke-linecap="round" opacity="0.55">
+        <path class="steam-path s1" d="M370 300 C 350 260, 400 230, 380 190 C 362 155, 400 130, 388 95"/>
+        <path class="steam-path s2" d="M450 300 C 430 255, 480 225, 460 185 C 442 150, 480 120, 468 85"/>
+        <path class="steam-path s3" d="M530 300 C 510 260, 560 230, 540 190 C 522 155, 560 130, 548 95"/>
+      </g>
+      <!-- saucer -->
+      <ellipse cx="450" cy="620" rx="260" ry="34" fill="#1c120b" opacity="0.6"/>
+      <ellipse cx="450" cy="608" rx="240" ry="26" fill="url(#cupBody)"/>
+      <!-- cup body -->
+      <path d="M280 380 L620 380 L590 560 Q580 600 540 600 L360 600 Q320 600 310 560 Z" fill="url(#cupBody)"/>
+      <path d="M300 390 L600 390 L575 555 Q567 585 535 585 L365 585 Q333 585 325 555 Z" fill="url(#coffeeSurface)"/>
+      <!-- handle -->
+      <path d="M615 410 Q700 410 700 480 Q700 550 615 550" fill="none" stroke="url(#cupBody)" stroke-width="26" stroke-linecap="round"/>
+      <!-- rune mark on cup -->
+      <g stroke="#b8863f" stroke-width="6" stroke-linecap="round" opacity="0.85">
+        <line x1="450" y1="440" x2="450" y2="500"/>
+        <line x1="450" y1="450" x2="425" y2="470"/>
+        <line x1="450" y1="450" x2="475" y2="470"/>
+      </g>
+    </svg>
+  </div>
+  <div class="splash-content"><br><br><br>
+    <h1 class="splash-title">وایکینگ کافی</h1>
+    <button id="enterBtn" class="splash-enter" aria-label="ورود به سایت">
+      <span class="enter-ring"></span>
+      <span class="enter-text">برای ورود کلیک کنید</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===================== MAIN APP ===================== -->
+<div id="app" class="hidden">
+
+  <!-- Top Navigation -->
+  <header class="topnav">
+    <div class="nav-left">
+      <button class="nav-btn" id="navShop" data-page="shopPage">فروشگاه</button>
+      <button class="nav-btn" id="navLocation" data-page="locationPage">مکان</button>
+      <button class="nav-btn" id="navLogin" data-page="loginPage">ورود</button>
+      <button class="cart-btn" id="cartOpenBtn" aria-label="سبد خرید">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h2l1.6 9.6a2 2 0 0 0 2 1.7h7.4a2 2 0 0 0 2-1.6L20.5 9H7"/><circle cx="10" cy="20.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="17" cy="20.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+    <div class="nav-right">
+      <a href=""><span class="logo-text">وایکینگ  کافی</span></a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar" id="categoryBar">
+    <div class="category-scroll">
+      <button class="cat-btn active" data-cat="cake">کیک</button>
+      <button class="cat-btn" data-cat="cookie">کوکی</button>
+      <button class="cat-btn" data-cat="hot">نوشیدنی گرم</button>
+      <button class="cat-btn" data-cat="cold">نوشیدنی سرد</button>
+      <button class="cat-btn" data-cat="herbal">دمنوش</button>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+
+    <!-- SHOP PAGE -->
+    <section id="shopPage" class="page active">
+      <div class="shop-heading">
+        <h2 id="shopCatTitle">کیک</h2>
+        <p id="shopCatDesc">پخت تازه‌ی روزانه با دستور شمالی و طعم اصیل</p>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <section id="detailPage" class="page">
+      <button class="back-btn" id="backFromDetail">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+        بازگشت به فروشگاه
+      </button>
+      <div class="detail-wrap" id="detailWrap"></div>
+    </section>
+
+    <!-- LOCATION PAGE -->
+    <section id="locationPage" class="page">
+      <div class="location-wrap">
+        <div class="location-map">
+          <iframe title="نقشه وایکینگ کافی" src="https://maps.google.com/maps?q=%D8%AA%D9%87%D8%B1%D8%A7%D9%86%2C%20%D8%AE%DB%8C%D8%A7%D8%A8%D8%A7%D9%86&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="location-info">
+          <h2>موقعیت ما</h2>
+          <p class="location-sub">در قلب شهر منتظر شما هستیم</p>
+          <ul class="info-list">
+            <li>
+              <span class="info-icon"></span>
+              <div><strong>آدرس</strong><p>تهران، خیابان ولیعصر، بالاتر از میدان ونک، پلاک ۱۴۲</p></div>
+            </li>
+            <li>
+              <span class="info-icon"></span>
+              <div><strong>تلفن</strong><p dir="ltr">021 - 8890 4471</p></div>
+            </li>
+            <li>
+              <span class="info-icon"></span>
+              <div><strong>ایمیل</strong><p dir="ltr">hello@vikingcoffee.ir</p></div>
+            </li>
+            <li>
+              <span class="info-icon"></span>
+              <div><strong>ساعات کاری</strong><p>هر روز هفته middo; ۸:۰۰ تا ۲۳:۳۰</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGIN PAGE -->
+    <section id="loginPage" class="page">
+      <div class="login-wrap">
+        <div class="login-card">
+          <h2>ورود / عضویت</h2>
+          <p class="login-sub">به باشگاه مشتریان وایکینگ کافی بپیوندید</p>
+          <form id="loginForm" novalidate>
+            <div class="input-group">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-3.8 5-5.5 7.5-5.5s5.9 1.7 7.5 5.5"/></svg>
+              </span>
+              <input type="text" placeholder="نام" required>
+            </div>
+            <div class="input-group">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-3.8 5-5.5 7.5-5.5s5.9 1.7 7.5 5.5"/></svg>
+              </span>
+              <input type="text" placeholder="نام خانوادگی" required>
+            </div>
+            <div class="input-group">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v14H4z"/><path d="M4 6l8 6 8-6"/></svg>
+              </span>
+              <input type="text" placeholder="نام کاربری" required>
+            </div>
+            <div class="input-group">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1z"/></svg>
+              </span>
+              <input type="tel" placeholder="شماره تلفن" required dir="ltr">
+            </div>
+            <div class="input-group">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>
+              </span>
+              <input type="email" placeholder="ایمیل" required dir="ltr">
+            </div>
+            <button type="submit" class="login-submit">ورود به حساب کاربری</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-sidebar" id="cartSidebar" aria-label="سبد خرید">
+  <div class="cart-header">
+    <h3>سبد خرید</h3>
+    <button class="cart-close" id="cartCloseBtn" aria-label="بستن سبد">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty" id="cartEmptyMsg">سبد خرید شما خالی است</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>جمع کل</span>
+      <span id="cartTotal">۰ تومان</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">تسویه حساب</button>
+  </div>
+</aside>
+
+<!-- FLOATING CALL BUTTON -->
+<a href="tel:02188904471" class="floating-call" aria-label="تماس با ما">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1z"/></svg>
+  <span class="call-pulse"></span>
+</a>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
